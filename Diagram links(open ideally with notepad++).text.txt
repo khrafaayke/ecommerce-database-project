@@ -1,4 +1,4 @@
-Open ideally with notepad++
+Open ideally with/copy paste into notepad++
 
 Admin diagram link : https://drive.google.com/file/d/1K_side1KhztKc8lVQLgIOxhllyEd6P5W/view?usp=share_link
 
