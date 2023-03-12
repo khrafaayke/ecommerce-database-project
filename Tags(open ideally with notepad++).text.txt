@@ -1,0 +1,35 @@
+Open ideally with notepad++
+
+Admin diagram link : https://drive.google.com/file/d/1K_side1KhztKc8lVQLgIOxhllyEd6P5W/view?usp=share_link
+
+Customers diagram link : https://drive.google.com/file/d/1jvhoVVk1dydlkgaIQ51o39RAXwdd8kFy/view?usp=share_link
+
+Current_details diagram link : https://drive.google.com/file/d/1L2aFZyk-MQUHmhtaBHV8YwVAks4Vhutj/view?usp=share_link
+
+Cust_details diagram link : https://drive.google.com/file/d/1YH5TxZuztt0xlxlA7lTkVCZMAjQioOPn/view?usp=share_link
+
+Customers diagram link : https://drive.google.com/file/d/1uoyaDOypG4j2Ea26wpsLBor9IYVBZc1h/view?usp=share_link
+
+Discounts diagram link : https://drive.google.com/file/d/1BhqVzb4jt9wiCidbnBY-ro46qgF47sG7/view?usp=share_link
+
+Ecommerce store diagram link : https://drive.google.com/file/d/1tIbehImvn7NKjSHfg22LermqRl52wVl8/view?usp=share_link
+
+Ord_details diagram link : https://drive.google.com/file/d/1QbZWsGG9RixdSEOYA3f5beZ0w6qVspjx/view?usp=share_link
+
+Orders diagram link : https://drive.google.com/file/d/1uIUDC-JyMBf5OlXz_5LbcLUK6RTFhlmY/view?usp=share_link
+
+Prod_details diagram link : https://drive.google.com/file/d/1vY74YDh1LajU38FxrRjGFW9z5g4O3oq5/view?usp=share_link
+
+Prod_options diagram link : https://drive.google.com/file/d/1zRbiSeXAsyfyWYSDw2G9bq3sB2TBYQ0m/view?usp=share_link
+
+Product diagram link : https://drive.google.com/file/d/163Yg2rCEnLL9REbF1krtLWChsbRBGpyJ/view?usp=share_link
+
+Ratings diagram link : https://drive.google.com/file/d/1pboQrmCQfmJf5tcIcp4yFL_--3z4hmSg/view?usp=share_link
+
+Replacements diagram link : https://drive.google.com/file/d/1b4MyKVmqP-XQFakS1f69xMsyLRNOSmUI/view?usp=share_link
+
+Reviews diagram link : https://drive.google.com/file/d/1hAh4tKvfa2RgpXWU2dxbKpLUDEwcrQy7/view?usp=share_link
+
+Seller diagram link : https://drive.google.com/file/d/1x6Sze7H_a84qtCvIaws0L6gRji9RyRCr/view?usp=share_link
+
+Tags diagram link : https://drive.google.com/file/d/1BiKpLvY698NvH-QSg3AgHVYFKYCkhs5O/view?usp=share_link
