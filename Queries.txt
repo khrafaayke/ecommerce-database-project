@@ -1,0 +1,338 @@
+CREATE TABLE Admin(
+Admin_id INT,
+Admin_name CHAR(20),
+City CHAR(20),
+Email CHAR(20),
+Admin_pw CHAR(20),
+Admin_num char(20),
+PRIMARY KEY(Admin_id)
+);
+
+CREATE TABLE Customer(
+Cust_id INT,
+Cust_name CHAR(20),
+City CHAR(20),
+Payment CHAR(20),
+Membership CHAR(20),
+Delivery_add CHAR(50),
+Orders INT,
+Cart INT,
+Wishlist INT,
+PRIMARY KEY(Cust_id)
+);
+
+CREATE TABLE Cust_details(
+Cust_id INT,
+DOB DATE,
+Cust_gen CHAR(1),
+Cust_pw CHAR(20),
+Email CHAR(20),
+Cust_num CHAR(20),
+FOREIGN KEY(cust_id) REFERENCES Customer(Cust_id)
+);
+
+ 
+CREATE TABLE Seller(
+Sell_id INT,
+Sell_name CHAR(20),
+City CHAR(20),
+Email CHAR(20),
+Sell_gen CHAR(1),
+Sell_num char(20),
+Sell_pw char(20),
+PRIMARY KEY(Sell_id)
+); 
+ 
+
+CREATE TABLE Product(
+Prod_id INT,
+Name CHAR(20),
+Cost FLOAT,
+Sell_id INT,
+PRIMARY KEY(Prod_id),
+FOREIGN KEY(Sell_id) REFERENCES Seller(Sell_id)
+);
+
+
+CREATE TABLE Categories(
+Prod_id INT, 
+Category CHAR(20) ,
+Subcategory CHAR(20),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id)
+);
+
+CREATE TABLE Discounts(
+Discount_id INT ,
+Prod_id INT,
+Sell_id INT,
+CODE CHAR(20),
+Discount_per char(7),
+PRIMARY KEY(Discount_id),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id),
+FOREIGN KEY(Sell_id) REFERENCES Seller(Sell_id)
+);
+
+CREATE TABLE Current_discounts(
+Discount_id INT,
+Prod_id INT,
+Discount CHAR(30),
+PRIMARY KEY(Discount),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id),
+FOREIGN KEY(Discount_id) REFERENCES Discounts(Discount_id)
+);
+    
+CREATE TABLE Orders(
+Ord_id INT,
+Prod_id INT,
+Cust_id INT,
+Sell_id INT,
+Discounts char(10),
+Quantity int,
+Bill double,
+PRIMARY KEY(Ord_id),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id),
+FOREIGN KEY(Cust_id) REFERENCES Customer(Cust_id),
+FOREIGN KEY(Sell_id) REFERENCES Seller(Sell_id)
+);
+
+CREATE TABLE Ord_details(
+Ord_id INT,
+Prod_id INT,
+Replacement CHAR(20),
+Ord_dt DATE,
+Deliver_dt DATE,
+STATUS CHAR(20),
+FOREIGN KEY(Ord_id) REFERENCES Orders(Ord_id),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id)
+);    
+
+CREATE TABLE Prod_options(
+Prod_id INT,
+Color CHAR(20),
+Size CHAR(20),
+Quantity CHAR(20),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id)
+);
+
+
+
+CREATE TABLE Reviews(
+Rev_stars FLOAT,
+Ord_id INT,
+Cust_id INT,
+Sell_id INT,
+Avg_rev_stars FLOAT,
+FOREIGN KEY(Ord_id) REFERENCES Orders(Ord_id),
+FOREIGN KEY(Sell_id) REFERENCES Seller(Sell_id),
+FOREIGN KEY(Cust_id) REFERENCES Customer(Cust_id)
+);
+     
+CREATE TABLE Replacements(
+Replacement_id INT,
+Ord_id INT,
+Cust_id INT,
+Prod_id INT,
+Sell_id INT,
+Refund CHAR(20),
+Refund_amt FLOAT,
+Rep_prod_id int,
+PRIMARY KEY(Replacement_id),
+FOREIGN KEY(Ord_id) REFERENCES Orders(Ord_id),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id),
+FOREIGN KEY(Cust_id) REFERENCES Customer(Cust_id),
+FOREIGN KEY(Sell_id) REFERENCES Seller(Sell_id)
+);
+
+CREATE TABLE Tags(
+Tag_id INT,
+Prod_id INT,
+Image_num INT,
+Description_num INT,
+IsFeatured CHAR(20),
+IsOnSale CHAR(20),
+PopularityIndex FLOAT(20),
+Questions INT,
+Related_prod_ids INT,
+PRIMARY KEY(Tag_id),
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id)
+);
+
+create table Ratings(
+Prod_id int,
+Cust_id int,
+Stars  float,
+Avg_stars float,
+foreign key(Prod_id) references Product(Prod_id),
+foreign key(Cust_id) references Customer(Cust_id)
+);
+
+CREATE TABLE Prod_details(
+Prod_id INT,
+Brand_name CHAR(20),
+Category_name CHAR(20),
+Subcategory_name CHAR(20),
+Discount CHAR(30),
+Tag_id INT,
+Supplier CHAR(20),
+Origin CHAR(20),
+Admin_id INT,
+FOREIGN KEY(Prod_id) REFERENCES Product(Prod_id),
+FOREIGN KEY(Discount) REFERENCES Current_discounts(Discount),
+FOREIGN KEY(Admin_id) REFERENCES Admin(Admin_id)
+);
+
+INSERT INTO Admin VALUES
+(010,'James Varley','Manchester','mail.jim@gmail.com','1Bright*',07767646543),
+(020,'Mike Strong','New York','bigmikey@gmail.com','Ironman#2',07456443487);
+
+INSERT INTO Customer VALUES
+(100,'Bert Spencer','London','Visa debit','Premium','34, Westerly Lane,London',1,3,5),
+(200,'Betty Hartman','New York','Mastercard credit','Basic','54,Rhodes House,New York',3,0,1), 
+(500,'Adrian Baretta','Milan','Visa credit','Basic','12,Rue del Fratelli,Milan',2,1,0),
+(600,'Miles Burton','Nantes','Visa Debit', 'Premium','22,Les Buissons,Nantes',1,0,6),
+(300,'Hendon Murphy','Leeds', 'Mastercard debit','Premium','Flat 4,Melbourne street,Leeds',1,4,4),
+(700,'Karla Michael','Miami','Visa Debit','Premium','18,Trinity Drive,Miami',0,6,2),               
+(800,'Alicia Silva','Paris','Visa credit','Basic','no_5,Rue des Chevalieres',0,1,0); 
+
+INSERT INTO Cust_details VALUES
+(100,'1995-04-07','M','#456&Seven','bertie@gmail.com','07786543457'),       
+(200,'2001-09-08','F','Windsong33*','mailme@gmail.com','07655434567'),    
+(300,'1979-01-12','M','234543=as','mymail@gmail.com','07654356765'),              
+(500,'1994-06-05','M','%345#098Ar','Adrian @gmail.com','07876567456'),            
+(600,'2005-12-01','M','onlyme**333','getmail@gmail.com','07987658768'),
+(800,'1998-05-08','F','Alic44#**','mailas@gmail','07765876654'),
+(700,'2006-08-08','F','kAll%u%owt6','kmike@gmail.com','07456678567');             
+
+INSERT INTO Seller VALUES    
+(121,'Liz Wrightman','New York','mailiz@gmail.com','F','07987876765','#$$@23We'),
+(131,'Angela Marceline','Marseille','bonjour@gmail.com','F','07678567345','*Smiles56'),
+(141,'Mike Halsey','Athens','lovely1@gmail.com','M','07556745634','3XReknowed#'),
+(151,'Mark Allard','London','marcus@gmail.com','M','07234345456','&%4DS33ff'), 
+(161,'Jaqueline Cyrus','Barcelona','sendme@gmail.com','F','07678789567','45£GfD4T#'),     
+(181,'Rachel Merlin','Dover','rm@gmail.com','F','07456567345','23$£AdEw*'); 
+ 
+	  INSERT INTO Product VALUES
+(101,'Color TV',260.00,121),
+( 102,'Socks',10.00,141),
+(105,'Chair',7.00,151),
+(108,'Paper bin',3.00,131),
+(107,'Swivel Chair',5.00,131),
+(104,'Scarf',10.00,141),
+(109,'Jacket',20.00,161),
+(103,'T-Shirt',15.00,141),
+(106,'Spray Gun',20.00,121),
+(110,'Washing Machine',100.00,151),
+(111,'Tights',12.00,181),
+(112,'Filing Cabinet',50.00,131); 
+               
+INSERT INTO Categories VALUES
+(101,'Cat 2','Sub 3'),
+(102,'Cat 1','Sub 1'),
+(103,'Cat 1','Sub 1'),
+(104,'Cat 1','Sub 2'),
+(105,'Cat 3','Sub 5'),
+(106,'Cat 2','Sub 4'), 
+(107,'Cat 3','Sub 6'),
+(108,'Cat 3','Sub 6'),
+(109,'Cat 1','Sub 2'),
+(110,'Cat 2','Sub 3');
+
+INSERT INTO Discounts VALUES 
+(1124,101,121,'%Hotsalenov%','30%'),
+(1128,106,121,'%Hotsalenov%','30%'),
+(1126,109,161,'Just4u','15%');
+
+INSERT INTO Discounts(Discount_id,Prod_id,Sell_id,Discount_per)
+VALUES (1125,107,131,'20%'),
+       (1127,110,151,'10%');
+
+ INSERT INTO Orders VALUES
+       (123141,101,300,121,'No',50,13000.00),
+       (123142,107,500,131,'Discount',1,5.00),
+       (123143,103,600,141,'No',4,60.00),
+       (123144,110,100,151,'No',1,100.00),
+       (123145,101,500,121,'Promotion',1,260.00),
+       (123146,106,200,121,'Promotion',2,40.00),
+       (123147,109,200,161,'Coupon',1,20.00),
+       (123148,108,200,131,'No',5,15.00);
+
+INSERT INTO Ord_details VALUES
+(123141,101,'NO','2022-09-04','2022,08,24','Delivered'),
+(123142,107,'No','2022-11-10','2022-11-15','Delivered'),
+(123143,103,'No','2022-11-23','2022-11-26','Paid'),
+(123144,110,'No','2022-10-15','2022-10-18','Delivered'),
+(123145,101,'No','2022-10-12','2022-10-18','Delivered'),
+(123146,106,'Yes','2022-11-24','2022-11-28','Canceled'),
+(123147,109,'Yes','2022-11-25','2022-11-30','Pending'),
+(123148,108,'No','2022-11-25','2022-11-29','Posted');
+
+INSERT INTO Prod_options VALUES
+(102,'5 choices','S,M,L','100 +'),
+(103,'4 choices','S,M,L,XL','100 +'),
+(104,'6 choices','S,M,XL','50 +'),
+(108,'2 choices','2L,5L,10L','100 +'),
+(109,'3 options','M,L,XXL','20 +');
+
+INSERT INTO Prod_options(Prod_id,Quantity)
+VALUES (101,'100 +'),
+       (105,'10 +'),
+       (106,'50 +'),
+       (107,'50 +'),
+       (110,'20 +');
+
+INSERT INTO Reviews VALUES
+(5.0,123141,300,121,4.5),
+(5.0,123142,500,131,4.7),
+(5.0,123144,100,151,4.8),
+(5.0,123145,500,121,4.8),
+(2.5,123147,200,131,4.2);
+
+INSERT INTO Replacements VALUES
+(192,123147,200,109,161,'Partial',5,115);
+
+INSERT INTO Replacements(Replacement_id,Ord_id,Cust_id,Prod_id,Sell_id,Refund,Refund_amt) 
+VALUES(191,123146,200,106,121,'Total',20.00);
+
+INSERT INTO Tags VALUES
+(211,101,110,3113,'Techshop','Yes',4.5,3,118),
+(212,102,120,3123,'Dandies','Yes',5.0,1,120),
+(213,103,130,3133,'Dandies','Yes',7.0,2,122),
+(214,104,140,3143,'Dandies','Yes',4.0,1,125),
+(215,105,150,3153,'Cozy Home','Yes',3.5,0,123),
+(216,106,160,3163,'Techshop','Yes',6.0,4,135),
+(217,107,170,3173,'Highbrows','Yes',8.5,2,140),
+(218,108,180,3183,'Highbrows','Yes',5.5,1,138),
+(219,109,190,3193,'Style n taste','Yes',7.5,3,144),
+(220,110,200,3203,'Housestuff','Yes',6.7,5,142),
+(221,111,210,3213,'No','No',0.0,3,145),
+(222,112,220,3223,'Highbrows','No',0.0,0,137);
+
+INSERT INTO Ratings VALUES
+(101,300,5.0,4.5),
+(101,500,5.0,4.0),
+(107,500,4.5,5.0),
+(110,100,5.0,5.0);
+
+INSERT INTO Current_discounts VALUES
+(1124,101,'#1 November 30% off'),
+(1128,106,'#2 November 30% off'),
+(1125,107,'#1 Clearance 20% off'),
+(1126,109,'#1 Bonus coupon 15% off'),
+(1127,110,'#1 Clearance 10% off');
+
+INSERT INTO Prod_details VALUES
+(101,'Sharp','Electronics','Home Appliances','#1 November 30% off',211,'Rangar Logistics','Japan',10),
+(106,'Bosch','Electronics','Trade Appliances','#2 November 30% off',216,'Techspec','Germany',20),
+(107,'None','Furniture','Home','#1 Clearance 20% off',217,'Supllies to go!','Italy',10),
+(109,'Levi','Clothing','Women','#1 Bonus coupon 15% off',219,'Apparell imp/exp Ltd','USA',20),
+(110,'Sharp','Electronics','Home','#1 Clearance 10% off',220,'Rangar Logistics','Japan',10);
+
+INSERT INTO Prod_details(Prod_id,Brand_name,Category_name,Subcategory_name,Tag_id, Supplier, Origin,Admin_id)
+VALUES
+(102,'Next','Clothing','Men',212,'Apparell imp/exp Ltd','England',20),
+(103,'Next','Clothing','Men',213,'Apparell imp/exp Ltd','England',20),
+(104,'None','Clothing','Women',214,'Apparell imp/exp Ltd','England',20),
+(105,'None','Furniture','Home',215,'Supplies to go!','England',10),
+(108,'HQPlast','Furniture','Office',218,'Supplies to go!','Singapore',20),
+(111,'Next','Clothing','Women',221,'Apparell imp/exp Ltd','England',20),
+(112,'None','Furniture','Office',222,'Supplies to go!','China',10);
